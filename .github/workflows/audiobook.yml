@@ -1,0 +1,59 @@
+name: Autonomous Audiobook Production
+
+on:
+  schedule:
+    # GitHub cron is UTC. The Python scheduler enforces config.json timezone/time.
+    # Hourly triggers also provide recovery opportunities for retryable jobs.
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: autonomous-audiobook-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+      YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+      YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+      GOOGLE_DRIVE_CREDENTIALS: ${{ secrets.GOOGLE_DRIVE_CREDENTIALS }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg espeak-ng
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: python -m pip install --upgrade pip && pip install -r requirements.txt
+
+      - name: Validate required assets and secrets
+        run: |
+          test -n "$GEMINI_API_KEY"
+          test -n "$YOUTUBE_CLIENT_ID"
+          test -n "$YOUTUBE_CLIENT_SECRET"
+          test -n "$YOUTUBE_REFRESH_TOKEN"
+          test -n "$GOOGLE_DRIVE_CREDENTIALS"
+          test -f config.json
+          test -f voice.json
+          test -f input/topics.txt
+          test -f assets/background.mp4
+          test -f assets/thumbnail.png
+
+      - name: Run production pipeline
+        run: python -m src.main

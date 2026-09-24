@@ -1,0 +1,119 @@
+{
+  "timezone": "Asia/Karachi",
+  "daily_run_time": "04:00",
+  "schedule_window_minutes": 90,
+  "script_minutes_min": 60,
+  "script_minutes_max": 90,
+  "target_wpm": 130,
+  "youtube_privacy": "private",
+  "video_resolution": "1920x1080",
+  "video_fps": 30,
+  "narration_volume": 1.0,
+  "music_volume": 0.06,
+  "allow_provider_switch_within_book": true,
+  "generation": {
+    "temperature": 0.7,
+    "max_output_tokens": 12000
+  },
+  "models": {
+    "script": [
+      "gemini-3.8-flash"
+    ],
+    "metadata": [
+      "gemini-3.8-flash"
+    ],
+    "tts": [
+      "gemini-3.8-flash-tts",
+      "gemini-3.8-flash-lite-tts"
+    ]
+  },
+  "retry": {
+    "max_attempts": 5,
+    "min_delay_seconds": 8,
+    "max_delay_seconds": 60
+  },
+  "tts": {
+    "chunk_words": 700,
+    "allow_provider_switch_within_book": true
+  },
+  "drive": {
+    "root_folder_id": "CONFIGURE_DRIVE_ROOT_FOLDER_ID"
+  },
+  "assets": {
+    "background_video": "assets/background.mp4",
+    "thumbnail_template": "assets/thumbnail.png",
+    "covers_dir": "input/covers",
+    "pip_dir": "assets/pip"
+  },
+  "cover": {
+    "enabled": true,
+    "x": 70,
+    "y": 250,
+    "width": 420,
+    "height": 600
+  },
+  "pip": {
+    "enabled": true,
+    "max_images": 5,
+    "x": 1450,
+    "y": 650,
+    "width": 380,
+    "height": 380,
+    "timings": [
+      {
+        "start_seconds": 0,
+        "duration_seconds": 45
+      },
+      {
+        "start_seconds": 45,
+        "duration_seconds": 45
+      },
+      {
+        "start_seconds": 90,
+        "duration_seconds": 45
+      },
+      {
+        "start_seconds": 135,
+        "duration_seconds": 45
+      },
+      {
+        "start_seconds": 180,
+        "duration_seconds": 45
+      }
+    ]
+  },
+  "music": {
+    "required": false
+  },
+  "thumbnail": {
+    "cover_x": 60,
+    "cover_y": 80,
+    "cover_width": 420,
+    "cover_height": 560,
+    "hook_x": 560,
+    "hook_y": 180,
+    "hook_font_size": 92,
+    "hook_max_width": 1250,
+    "hook_fill": "#FFFFFF",
+    "hook_stroke": "#000000"
+  },
+  "ffmpeg_preset": "veryfast",
+  "ffmpeg_crf": 21,
+  "audio_bitrate": "192k",
+  "resources": {
+    "min_free_gb": 4,
+    "lock_ttl_minutes": 360
+  },
+  "cleanup": {
+    "delete_work_after_success": true
+  },
+  "youtube": {
+    "wait_for_processing": true,
+    "processing_wait_seconds": 900,
+    "processing_poll_seconds": 30
+  },
+  "continuity": {
+    "enabled": true
+  },
+  "music_ducking": true
+}

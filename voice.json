@@ -1,0 +1,24 @@
+{
+  "primary_provider": "gemini",
+  "language": "en-US",
+  "speed": 1.0,
+  "pitch": 0,
+  "volume": 1.0,
+  "style": "professional audiobook, calm, natural, clear, conversational",
+  "emotion": "calm",
+  "gemini": {
+    "voice": "Kore"
+  },
+  "edge_tts": {
+    "enabled": true,
+    "voice": "en-US-AndrewNeural",
+    "rate": "+0%",
+    "pitch": "+0Hz",
+    "use_unified_speed": true
+  },
+  "kokoro": {
+    "enabled": true,
+    "voice": "af_heart",
+    "speed": 1.0
+  }
+}

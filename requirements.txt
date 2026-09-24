@@ -1,0 +1,8 @@
+google-genai==1.40.0
+google-api-python-client==2.180.0
+google-auth==2.40.0
+edge-tts==7.0.0
+Pillow==11.0.0
+kokoro==0.9.4
+numpy==2.0.0
+soundfile==0.13.0
